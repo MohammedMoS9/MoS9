@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>امتحان اللغة العربية | النحو</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+:root{--paper:#f3fbfa;--ink:#123b3b;--accent:#0f766e;--accent2:#14b8a6;--gold:#f59e0b;--line:#99d5ca;--green:#15803d;--red:#dc2626;--soft:#dff5f0}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:20px;background:#142e37;background-image:radial-gradient(#31515a 1px,transparent 1px);background-size:24px 24px;font-family:'Cairo',sans-serif;color:var(--ink);display:flex;justify-content:center;align-items:flex-start}
+.sheet{width:100%;max-width:900px;background:var(--paper);border:3px solid var(--ink);box-shadow:12px 12px 0 #071c24;padding:38px 34px 26px;position:relative;margin:12px auto}.sheet:before{content:attr(data-label);position:absolute;top:-15px;right:20px;padding:5px 15px;background:var(--accent);color:#fff;font-weight:900;font-size:12px;transform:rotate(-1deg)}
+.hidden{display:none!important}.header{text-align:center;border-bottom:3px double var(--ink);padding-bottom:15px;margin-bottom:20px}.header h1{font-size:32px;font-weight:900;margin:0}.header p{margin:6px 0 0;color:#557273}.badge{display:inline-block;background:var(--ink);color:white;margin-top:10px;padding:6px 16px;font-weight:800;font-size:13px}.loginbox{display:flex;flex-direction:column;align-items:center;gap:14px;padding:15px 0}.input{width:100%;max-width:430px;padding:14px;border:2px solid var(--ink);font:800 17px 'Cairo';text-align:center;background:white}.btn{font:800 14px 'Cairo';padding:10px 22px;border:2px solid var(--ink);box-shadow:4px 4px 0 #123b3b33;cursor:pointer}.main{background:var(--accent);color:white}.secondary{background:white;color:var(--ink)}.danger{background:white;color:var(--red);border-color:var(--red)}.btn:disabled{opacity:.4;cursor:default}
+.bar{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 14px;margin-bottom:18px;background:var(--soft);border:2px solid var(--ink);font-weight:800}.timer{color:#b91c1c}.section{font-size:12px;color:var(--accent);font-weight:800;margin-bottom:6px}.question{font-size:19px;line-height:1.9;font-weight:800;background:#fff;border-right:5px solid var(--accent);padding:13px 16px;margin:8px 0 14px;box-shadow:3px 3px #123b3b0e}.opts{display:grid;gap:9px}.opt{display:flex;align-items:center;gap:10px;padding:10px 13px;background:#fff;border:2px solid var(--ink);cursor:pointer;font-size:16px;font-weight:700;transition:.12s}.opt:hover{background:#effaf7}.opt.selected{background:var(--soft);border-color:var(--accent)}.opt.correct{background:#dcfce7;border-color:var(--green);color:var(--green)}.opt.wrong{background:#fee2e2;border-color:var(--red);color:var(--red)}.letter{width:27px;height:27px;border:2px solid currentColor;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex:none}.explain{margin-top:12px;padding:10px;border:1px dashed var(--accent);background:#f0fdfa;line-height:1.8;font-size:13px}.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}.score{text-align:center;padding:22px;border:3px solid var(--ink);background:#fff;margin-bottom:16px}.score strong{display:block;font-size:50px;color:var(--accent)}.result-item{background:white;border:2px solid var(--ink);padding:12px;margin:10px 0;line-height:1.8}.result-item.right{border-right:7px solid var(--green)}.result-item.wrong{border-right:7px solid var(--red)}.result-item.skip{border-right:7px solid #94a3b8}.footer{text-align:center;border-top:2px solid var(--ink);margin-top:22px;padding-top:12px;color:#617579;font-size:12px}.note{font-size:12px;color:#667;text-align:center;line-height:1.8}
+@media(max-width:600px){body{padding:9px}.sheet{padding:28px 16px 20px}.header h1{font-size:25px}.question{font-size:17px}.opt{font-size:15px}}
+</style></head>
+<body>
+<section class="sheet" id="login" data-label="امتحان النحو | بالتوفيق">
+ <header class="header"><h1>امتحان اللغة العربية</h1><p>الأسماء الخمسة • كان وكاد • الممنوع من الصرف</p><span class="badge">٦٠ دقيقة • ٣٠ سؤالًا • الدرجة من ٣٠</span></header>
+ <div class="loginbox"><p class="note">اللهم علمنا ما ينفعنا وزدنا بك علما </p><input id="student" class="input" placeholder="اسمك ثنائي " autocomplete="name"><input id="password" class="input" placeholder="كلمة السر"><button class="btn main" id="start">ابدأ الامتحان</button><div class="note">كلمة السر: <b>MoS102</b></div></div>
+ <footer class="footer">إعداد: Mohammed Said</footer>
+</section>
+<section class="sheet hidden" id="quiz" data-label="اختبر نفسك">
+ <header class="header"><h1>امتحان النحو</h1><p>ركز في علامة الإعراب وسببها</p></header>
+ <div class="bar"><span>السؤال <b id="num">١</b> من ٣٠</span><span class="timer">⏳ <b id="time">٦٠:٠٠</b></span><span id="progress">٠ / ٣٠ تمت الإجابة</span></div>
+ <div class="section" id="topic"></div><div class="question" id="question"></div><div class="opts" id="options"></div>
+ <div class="actions"><button class="btn secondary" id="prev">السابق</button><button class="btn main" id="next">التالي</button><button class="btn danger" id="finish">تسليم الامتحان</button></div><footer class="footer">إعداد: Mohammed Said</footer>
+</section>
+<section class="sheet hidden" id="result" data-label="النتيجة النهائية">
+ <header class="header"><h1>أحسنت، انتهى الامتحان</h1><p>راجع إجاباتك وتعلّم من التصحيح</p></header>
+ <div class="score"><strong id="score"></strong><div id="message"></div><div id="sent" class="note"></div></div>
+ <div class="actions"><button class="btn main" id="toggle">عرض التصحيح كاملًا</button><button class="btn secondary" onclick="location.reload()">إعادة الامتحان</button></div><div id="review" class="hidden"></div><footer class="footer">إعداد: Mohammed Said</footer>
+</section>
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbxx7KIPDIYExPMYCDL-fQGjvm0uyXj7fXhaIJYZ0Kar-IV44Hb_94C6g_Rl3IEX41biEA/exec';
+const EMAIL='mohamedmos296@gmail.com';
+const Q=[
+{t:'الأسماء الخمسة',q:'عادَ _____ من السفر، وكان الجميع في استقباله.',o:['أباك','أبيك','أبوك','أبٌ'],a:2,e:'«أبوك» فاعل مرفوع بالواو؛ لأنه من الأسماء الخمسة، وهو مضاف.'},
+{t:'الأسماء الخمسة',q:'كرّم المديرُ _____ المجتهدَ.',o:['أخوك','أخاك','أخيك','أخٌ'],a:1,e:'«أخاك» مفعول به منصوب بالألف؛ لأنه من الأسماء الخمسة.'},
+{t:'الأسماء الخمسة',q:'استمعتُ إلى نصيحةِ _____.',o:['ذي','ذا','ذو','ذيًا'],a:0,e:'«ذي» اسم مجرور بـ«إلى»، وعلامة جره الياء؛ لأنه من الأسماء الخمسة.'},
+{t:'الأسماء الخمسة',q:'اختر الجملة التي رُفع فيها اسم من الأسماء الخمسة بالواو.',o:['رأيتُ حماك في السوق.','مررتُ بأبيك صباحًا.','هذا ذو علمٍ نافع.','إن أخاك محبوب.'],a:2,e:'«ذو» خبر مرفوع بالواو، وهو مضاف. بقية الأمثلة منصوبة أو مجرورة أو اسم إن.'},
+{t:'الأسماء الخمسة',q:'إن _____ صاحبُ خلقٍ كريم.',o:['أخوك','أخاك','أخيك','أخٌ'],a:1,e:'«أخاك» اسم إن منصوب بالألف؛ لأنه من الأسماء الخمسة.'},
+{t:'الأسماء الخمسة',q:'ما علامة جر كلمة «حميك» في: سلمتُ على حميك؟',o:['الكسرة','الياء','الألف','الواو'],a:1,e:'«حميك» اسم مجرور بـ«على»، وعلامة جره الياء؛ لأنه من الأسماء الخمسة.'},
+{t:'الأسماء الخمسة',q:'أي جملة ضُبطت فيها كلمة «فو» ضبطًا صحيحًا؟',o:['حافظْ على فوك.','حافظْ على فاك.','حافظْ على فيك.','حافظْ على فوٌ.'],a:2,e:'تُحذف الميم من «فم» عند إعرابها من الأسماء الخمسة: فوك، فاك، فيك.'},
+{t:'الأسماء الخمسة',q:'جاء _____ إلى المدرسة مبكرًا.',o:['حما الطالبِ','حمو الطالبِ','حمي الطالبِ','حما الطالبُ'],a:1,e:'«حمو الطالب» فاعل مرفوع بالواو، وهو مضاف، و«الطالب» مضاف إليه.'},
+{t:'الأسماء الخمسة',q:'أي كلمة مما يأتي لا تُعرب بالحروف في الجملة: «أكرمتُ أخي»؟',o:['أكرمتُ','أخي','لا توجد كلمة','أكرمتُ وأخي'],a:1,e:'«أخي» مضاف إلى ياء المتكلم، فتُقدّر عليه العلامات ولا يعرب بالحروف.'},
+{t:'الأسماء الخمسة',q:'اختر الإعراب الصحيح لكلمة «ذا» في: احترمْ ذا الخلق.',o:['فاعل مرفوع بالواو','مفعول به منصوب بالألف','مضاف إليه مجرور بالياء','خبر مرفوع بالضمة'],a:1,e:'«ذا» مفعول به منصوب بالألف؛ لأنه من الأسماء الخمسة، وهو مضاف.'},
+{t:'كان وكاد',q:'كان الجوُّ معتدلًا. ما إعراب «معتدلًا»؟',o:['اسم كان مرفوع','خبر كان منصوب','فاعل مرفوع','مفعول به منصوب'],a:1,e:'خبر كان منصوب، وعلامة نصبه الفتحة.'},
+{t:'كان وكاد',q:'أصبح _____ نشيطين.',o:['الطالبان','الطالبين','الطالبانِ','الطالبون'],a:0,e:'«الطالبان» اسم أصبح مرفوع بالألف؛ لأنه مثنى، وخبرها «نشيطين» منصوب بالياء.'},
+{t:'كان وكاد',q:'ليس الطالبُ _____ عن واجبه.',o:['مقصرٌ','مقصرًا','مقصرٍ','مقصرون'],a:1,e:'«مقصرًا» خبر ليس منصوب بالفتحة.'},
+{t:'كان وكاد',q:'ما زال العاملان _____ في عملهما.',o:['مخلصان','مخلصين','مخلصون','مخلصًا'],a:1,e:'«مخلصين» خبر ما زال منصوب بالياء؛ لأنه مثنى.'},
+{t:'كان وكاد',q:'كاد المطرُ _____.',o:['أن يهطلَ','يهطلُ','هطولًا','هاطلٌ'],a:1,e:'خبر «كاد» فعل مضارع مرفوع، ويأتي غالبًا مجردًا من «أن».'},
+{t:'كان وكاد',q:'أوشك المسافرُ أن _____.',o:['يصلُ','يصلَ','وصولًا','واصلٌ'],a:1,e:'خبر «أوشك» مضارع مقترن بـ«أن»، وهو منصوب.'},
+{t:'كان وكاد',q:'شرع الطلابُ _____ الدرس.',o:['يكتبونَ','أن يكتبوا','كتابةَ','كاتبون'],a:0,e:'«شرع» من أفعال الشروع، وخبرها مضارع مرفوع بلا «أن».'},
+{t:'كان وكاد',q:'أي جملة خبر كان فيها جملة فعلية؟',o:['كان الجوُّ لطيفًا.','كان الطالبُ يراجعُ دروسه.','كان الطالبُ في الفصل.','كان الطالبُ مجتهدًا.'],a:1,e:'«يراجع دروسه» جملة فعلية في محل نصب خبر كان.'},
+{t:'كان وكاد',q:'ما برح المجتهدون _____ على التفوق.',o:['حريصون','حريصين','حريصًا','حريصان'],a:1,e:'«حريصين» خبر ما برح منصوب بالياء؛ لأنه جمع مذكر سالم.'},
+{t:'كان وكاد',q:'في أي جملة «كاد» تامة وليست ناقصة؟',o:['كاد الطفلُ يبكي.','كاد المطرُ أن ينزل.','كاد الأمرُ.','كاد اللاعبُ يفوز.'],a:2,e:'«كاد» التامة تكتفي بفاعلها، مثل: كاد الأمرُ، أي قارب.'},
+{t:'الممنوع من الصرف',q:'أي كلمة ممنوعة من الصرف في: «تشتهر مصر بمعالم تاريخية»؟',o:['تشتهر','مصر','بمعالم','تاريخية'],a:1,e:'«مصر» علم مؤنث ممنوع من الصرف للعلمية والتأنيث.'},
+{t:'الممنوع من الصرف',q:'زرتُ _____ كثيرةً في المدينة.',o:['مساجدَ','مساجدٍ','المساجدَ','مسجدًا'],a:0,e:'«مساجد» صيغة منتهى الجموع، فتُمنع من الصرف وتُنصب بالفتحة بلا تنوين.'},
+{t:'الممنوع من الصرف',q:'سافرتُ إلى _____ في الصيف.',o:['إبراهيمَ','إبراهيمِ','إبراهيمٍ','إبراهيمًا'],a:0,e:'«إبراهيم» علم أعجمي زائد على ثلاثة أحرف، ممنوع من الصرف ويجر بالفتحة.'},
+{t:'الممنوع من الصرف',q:'مررتُ بصحراءَ واسعةٍ. لماذا جُرّت «صحراء» بالفتحة؟',o:['لأنها جمع تكسير','لأنها مختومة بألف التأنيث الممدودة','لأنها علم أعجمي','لأنها صفة على وزن أفعل'],a:1,e:'«صحراء» ممنوعة من الصرف لألف التأنيث الممدودة، فتُجر بالفتحة.'},
+{t:'الممنوع من الصرف',q:'أي كلمة ممنوعة من الصرف للعلمية ووزن الفعل؟',o:['أحمد','خالد','سعيد','محمد'],a:0,e:'«أحمد» علم على وزن الفعل، ممنوع من الصرف للعلمية ووزن الفعل.'},
+{t:'الممنوع من الصرف',q:'سرتُ في _____ شاسعةٍ.',o:['صحراءٍ','صحراءَ','صحراءٌ','الصحراءَ'],a:1,e:'«صحراء» اسم مجرور بـ«في»، لكنه ممنوع من الصرف لألف التأنيث الممدودة، فيُجر بالفتحة.'},
+{t:'الممنوع من الصرف',q:'صليتُ في مساجدِ المدينة. ما سبب جر «مساجد» بالكسرة؟',o:['لأنها مصروفة','لأنها مضافة','لأنها جمع مؤنث سالم','لأنها مسبوقة بحرف جر فقط'],a:1,e:'الممنوع من الصرف يُجر بالكسرة إذا أضيف أو دخلت عليه «أل».'},
+{t:'الممنوع من الصرف',q:'اختر الضبط الصحيح: «تجوّلتُ في _____ واسعةٍ».',o:['شوارعَ','شوارعِ','شوارعٍ','الشوارعَ'],a:0,e:'«شوارع» صيغة منتهى الجموع، وهي ممنوعة من الصرف؛ فتُجر بالفتحة ما لم تُضف أو تدخل عليها «أل».'},
+{t:'الممنوع من الصرف',q:'أي اسم ممنوع من الصرف لألف التأنيث المقصورة؟',o:['ذكرى','كتاب','مصابيح','عثمان'],a:0,e:'«ذكرى» مختومة بألف التأنيث المقصورة، لذا تُمنع من الصرف.'},
+{t:'الممنوع من الصرف',q:'اختر الجملة الصحيحة إعرابيًا.',o:['سافرتُ إلى أحمدِ.','سافرتُ إلى أحمدَ.','سافرتُ إلى أحمدٍ.','سافرتُ إلى الأحمدَ.'],a:1,e:'«أحمد» ممنوع من الصرف، فيُجر بالفتحة إذا لم يُضف ولم تدخل عليه «أل».'}
+];
+let name='',answers=Array(Q.length).fill(null),index=0,seconds=3600,timer=null,finished=false;const digits=n=>String(n).replace(/\d/g,x=>'٠١٢٣٤٥٦٧٨٩'[x]);
+const $=id=>document.getElementById(id);
+function begin(){name=$('student').value.trim();if(!name){alert('اكتب اسم الطالب أولًا');return}if($('password').value.trim()!=='MoS102'){alert('كلمة السر غير صحيحة');return}$('login').classList.add('hidden');$('quiz').classList.remove('hidden');draw();timer=setInterval(()=>{seconds--;let m=Math.floor(seconds/60),s=seconds%60;$('time').textContent=digits(m)+':'+digits(s).padStart(2,'٠');if(seconds<=0)submit()},1000)}
+function draw(){let q=Q[index];$('num').textContent=digits(index+1);$('topic').textContent=q.t;$('question').textContent=q.q;$('progress').textContent=digits(answers.filter(x=>x!==null).length)+' / ٣٠ تمت الإجابة';let box=$('options');box.innerHTML='';q.o.forEach((v,i)=>{let b=document.createElement('button');b.type='button';b.className='opt'+(answers[index]===i?' selected':'');b.innerHTML='<span class="letter">'+['أ','ب','ج','د'][i]+'</span><span></span>';b.lastChild.textContent=v;b.onclick=()=>{answers[index]=i;draw()};box.appendChild(b)});$('prev').disabled=index===0;$('next').disabled=index===Q.length-1}
+function submit(){if(finished)return;if(!confirm('هل تريد تسليم الامتحان وعرض النتيجة؟'))return;finished=true;clearInterval(timer);let score=Q.reduce((n,q,i)=>n+(answers[i]===q.a?1:0),0);$('quiz').classList.add('hidden');$('result').classList.remove('hidden');$('score').textContent=digits(score)+' / ٣٠';$('message').textContent=score>=27?'  برافو عليك ':score>=22?'  حلو ربنا يوفقك ':score>=15?'  تمام بس راجع الحتت الي اخطات فيها.':'  راجع القواعد وحاول مرة أخرى ';send(score);buildReview();}
+function send(score){if(!ENDPOINT.startsWith('https://script.google.com/macros/s/'))return;fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({name,score,total:Q.length,email:EMAIL,subject:'نتيجة امتحان اللغة العربية - النحو'})}).then(()=>$('sent').textContent='تم إرسال النتيجة  .').catch(()=>$('sent').textContent='ظهرت نتيجتك هنا؛ تعذّر تأكيد الإرسال،   .');}
+function buildReview(){let box=$('review');Q.forEach((q,i)=>{let ok=answers[i]===q.a,skip=answers[i]===null;let d=document.createElement('article');d.className='result-item '+(skip?'skip':ok?'right':'wrong');let your=skip?'لم تتم الإجابة':q.o[answers[i]];d.innerHTML='<b>السؤال '+digits(i+1)+' • '+q.t+'</b><div>'+q.q+'</div><div>إجابتك: '+your+'</div><div>الإجابة الصحيحة: '+q.o[q.a]+'</div><div class="explain">الشرح: '+q.e+'</div>';box.appendChild(d)})}
+$('start').onclick=begin;$('password').addEventListener('keydown',e=>{if(e.key==='Enter')begin()});$('prev').onclick=()=>{index=Math.max(0,index-1);draw()};$('next').onclick=()=>{index=Math.min(Q.length-1,index+1);draw()};$('finish').onclick=submit;$('toggle').onclick=()=>{$('review').classList.toggle('hidden');$('toggle').textContent=$('review').classList.contains('hidden')?'عرض التصحيح كاملًا':'إخفاء التصحيح'};
+</script></body></html>
